@@ -51,18 +51,41 @@ sub td {
 
 Sample output:
 
- root
- |-- child1
- |   \-- grandc1
- |-- child2
- |-- child3
- |   |-- grandc2
- |   |-- grandc3
- |   |  |-- grandgrandc1
- |   |  \-- grandgrandc2
- |   |-- grandc4
- |   \-- grandc5
- \-- child4
+ (Tree::Example::HashNode) {_parent=>undef,id=>1,level=>0}
+ |-- (Tree::Example::HashNode::Sub1) {id=>2,level=>1}
+ |   \-- (Tree::Example::HashNode::Sub2) {id=>5,level=>2}
+ |       |-- (Tree::Example::HashNode::Sub1) {id=>7,level=>3}
+ |       |   \-- (Tree::Example::HashNode::Sub2) {id=>15,level=>4}
+ |       |-- (Tree::Example::HashNode::Sub1) {id=>8,level=>3}
+ |       |-- (Tree::Example::HashNode::Sub1) {id=>9,level=>3}
+ |       \-- (Tree::Example::HashNode::Sub1) {id=>10,level=>3}
+ |-- (Tree::Example::HashNode::Sub1) {id=>3,level=>1}
+ |   \-- (Tree::Example::HashNode::Sub2) {id=>6,level=>2}
+ |       |-- (Tree::Example::HashNode::Sub1) {id=>11,level=>3}
+ |       |   \-- (Tree::Example::HashNode::Sub2) {id=>16,level=>4}
+ |       |-- (Tree::Example::HashNode::Sub1) {id=>12,level=>3}
+ |       |-- (Tree::Example::HashNode::Sub1) {id=>13,level=>3}
+ |       \-- (Tree::Example::HashNode::Sub1) {id=>14,level=>3}
+ \-- (Tree::Example::HashNode::Sub1) {id=>4,level=>1}
+
+Sample output when rendering an array-backed tree:
+
+ (Tree::Example::ArrayNode) [undef,undef,undef,"<obj>","<obj>","<obj>"]
+ |-- (Tree::Example::ArrayNode::Sub1) [undef,undef,"<obj>","<obj>"]
+ |   \-- (Tree::Example::ArrayNode::Sub2) [undef,undef,"<obj>","<obj>","<obj>","<obj>","<obj>"]
+ |       |-- (Tree::Example::ArrayNode::Sub1) [undef,undef,"<obj>","<obj>"]
+ |       |   \-- (Tree::Example::ArrayNode::Sub2) [undef,undef,"<obj>"]
+ |       |-- (Tree::Example::ArrayNode::Sub1) [undef,undef,"<obj>"]
+ |       |-- (Tree::Example::ArrayNode::Sub1) [undef,undef,"<obj>"]
+ |       \-- (Tree::Example::ArrayNode::Sub1) [undef,undef,"<obj>"]
+ |-- (Tree::Example::ArrayNode::Sub1) [undef,undef,"<obj>","<obj>"]
+ |   \-- (Tree::Example::ArrayNode::Sub2) [undef,undef,"<obj>","<obj>","<obj>","<obj>","<obj>"]
+ |       |-- (Tree::Example::ArrayNode::Sub1) [undef,undef,"<obj>","<obj>"]
+ |       |   \-- (Tree::Example::ArrayNode::Sub2) [undef,undef,"<obj>"]
+ |       |-- (Tree::Example::ArrayNode::Sub1) [undef,undef,"<obj>"]
+ |       |-- (Tree::Example::ArrayNode::Sub1) [undef,undef,"<obj>"]
+ |       \-- (Tree::Example::ArrayNode::Sub1) [undef,undef,"<obj>"]
+ \-- (Tree::Example::ArrayNode::Sub1) [undef,undef,"<obj>"]
 
 
 =head1 DESCRIPTION
