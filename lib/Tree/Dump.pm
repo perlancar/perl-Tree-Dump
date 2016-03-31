@@ -7,18 +7,37 @@ use 5.010001;
 use strict;
 use warnings;
 
+use Data::Dmp;
+use Scalar::Util qw(blessed reftype);
+use Tree::ToTextLines qw(render_tree_as_text);
+
 use Exporter qw(import);
 our @EXPORT = qw(td tdmp);
 
 sub tdmp {
-    require Tree::To::TextLines;
-    Tree::To::TextLines::render_tree_as_text({
+    my %opts = (
         show_guideline => 1,
-    }, $tree);
+        on_show_node => sub {
+            my ($node, $level, $seniority, $is_last_child, $opts) = @_;
+            my $res = "(".ref($node).") ";
+            if (reftype($node) eq 'HASH') {
+                $res .= dmp({
+                    map { ($_ => $node->{$_}) }
+                        grep { !/^_?children$/ && !blessed($node->{$_}) }
+                            keys %$node });
+            } else {
+                $res .= dmp([ map { blessed($_) ? "<obj>": $_ } @$node]);
+            }
+            $res;
+        },
+    );
+
+    render_tree_as_text(\%opts, $_[0]);
 }
 
 sub td {
     my $tdmp = tdmp(@_);
+    print $tdmp;
     $tdmp;
 }
 
