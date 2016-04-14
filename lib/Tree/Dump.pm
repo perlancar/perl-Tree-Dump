@@ -25,8 +25,10 @@ sub tdmp {
                     map { ($_ => $node->{$_}) }
                         grep { !/^_?children$/ && !blessed($node->{$_}) }
                             keys %$node });
-            } else {
+            } elsif (reftype($node) eq 'ARRAY') {
                 $res .= dmp([ map { blessed($_) ? "<obj>": $_ } @$node]);
+            } else {
+                $res .= "$node";
             }
             $res;
         },
