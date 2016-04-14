@@ -1,5 +1,11 @@
 Revision history for Tree-Dump
 
+0.03    2016-04-14 (PERLANCAR)
+
+	- Handle node that is not hash-based nor array-based, e.g.
+	  Class::InsideOut object.
+
+
 0.02    2016-03-31 (PERLANCAR)
 
 	- No functional changes.
