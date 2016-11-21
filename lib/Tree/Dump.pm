@@ -15,24 +15,28 @@ use Exporter qw(import);
 our @EXPORT = qw(td tdmp);
 
 sub tdmp {
-    my %opts = (
-        show_guideline => 1,
-        on_show_node => sub {
-            my ($node, $level, $seniority, $is_last_child, $opts) = @_;
-            my $res = "(".ref($node).") ";
-            if (reftype($node) eq 'HASH') {
-                $res .= dmp({
-                    map { ($_ => $node->{$_}) }
-                        grep { !/^_?children$/ && !blessed($node->{$_}) }
-                            keys %$node });
-            } elsif (reftype($node) eq 'ARRAY') {
-                $res .= dmp([ map { blessed($_) ? "<obj>": $_ } @$node]);
-            } else {
-                $res .= "$node";
-            }
-            $res;
-        },
-    );
+    my %opts;
+
+    if (ref($_[0]) eq 'HASH') {
+        %opts = %{shift @_};
+    }
+
+    $opts{show_guideline} = 1;
+    $opts{on_show_node} = sub {
+        my ($node, $level, $seniority, $is_last_child, $opts) = @_;
+        my $res = "(".ref($node).") ";
+        if (reftype($node) eq 'HASH') {
+            $res .= dmp({
+                map { ($_ => $node->{$_}) }
+                    grep { !/^_?children$/ && !blessed($node->{$_}) }
+                    keys %$node });
+        } elsif (reftype($node) eq 'ARRAY') {
+            $res .= dmp([ map { blessed($_) ? "<obj>": $_ } @$node]);
+        } else {
+            $res .= "$node";
+        }
+        $res;
+    };
 
     render_tree_as_text(\%opts, $_[0]);
 }
@@ -104,13 +108,32 @@ requirements.
 
 =head1 FUNCTIONS
 
-=head2 td($tree) => str
+=head2 td([ \%opts, ] $tree) => str
 
-Dump tree to STDOUT and return it.
+Dump tree to STDOUT and return it. See C<tdmp> for list of known options.
 
-=head2 tdmp($tree) => str
+=head2 tdmp([ \%opts, ] $tree) => str
 
-Return dumped tree.
+Return dumped tree. If first argument is a plain hashref, it will be regarded as
+options. Known options:
+
+=over
+
+=item * children_method => str (default: children)
+
+Example:
+
+ children_method => "get_children"
+
+By default, C<children> is the method that will be used on node objects to
+retrieve children nodes. But you can customize that using this option. Note that
+the method must return either a list or arrayref of nodes.
+
+=item * indent => int (default: 2)
+
+Number of spaces for each indent level.
+
+=back
 
 
 =head1 SEE ALSO
