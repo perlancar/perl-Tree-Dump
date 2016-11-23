@@ -1,5 +1,11 @@
 Revision history for Tree-Dump
 
+0.05    2016-11-23 (PERLANCAR)
+
+	- [Incompatible change] Rename children_method option to
+	  get_children_method.
+
+
 0.04    2016-11-21 (PERLANCAR)
 
 	- Accept options (currently known options: indent,
