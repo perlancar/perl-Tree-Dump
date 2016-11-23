@@ -119,11 +119,11 @@ options. Known options:
 
 =over
 
-=item * children_method => str (default: children)
+=item * get_children_method => str (default: children)
 
 Example:
 
- children_method => "get_children"
+ get_children_method => "get_children"
 
 By default, C<children> is the method that will be used on node objects to
 retrieve children nodes. But you can customize that using this option. Note that
