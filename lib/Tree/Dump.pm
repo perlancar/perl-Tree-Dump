@@ -1,6 +1,10 @@
+## no critic: Modules::ProhibitAutomaticExportation
+
 package Tree::Dump;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
 use 5.010001;
@@ -24,6 +28,7 @@ sub tdmp {
     $opts{show_guideline} = 1;
     $opts{on_show_node} = sub {
         my ($node, $level, $seniority, $is_last_child, $opts) = @_;
+        die "Please specify tree node object (arg0)" unless defined $node;
         my $res = "(".ref($node).") ";
         if (reftype($node) eq 'HASH') {
             $res .= dmp({
