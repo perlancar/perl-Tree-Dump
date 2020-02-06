@@ -1,3 +1,8 @@
+0.060   2020-02-06  Released-By: PERLANCAR; Urgency: medium
+
+	- [ux] Die when undef is given.
+
+
 0.05    2016-11-23  Released-By: PERLANCAR
 
 	- [Incompatible change] Rename children_method option to
